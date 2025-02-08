@@ -6,6 +6,19 @@ var player_level = 1  # Уровень игрока
 var experience = 0  # Опыт
 var experience_to_next_level = 100  # Опыт для следующего уровня
 
+# Список работников
+var staff = []
+
+# Функция для найма работника
+func hire_staff():
+    var cost = 5000  # Стоимость найма
+    if rubles >= cost:
+        add_rubles(-cost)
+        staff.append("Новый работник")
+        UI.show_message("Новый работник нанят!")
+    else:
+        UI.show_message("Недостаточно рублей для найма!")
+
 # Рецепты
 var recipes = {
     "Классический бургер": {"булка": 1, "говяжья котлета": 1, "цена": 100},
