@@ -27,9 +27,11 @@ var recipes = {
 
 # Оборудование
 var equipment = {
-    "grill": {"unlocked": false, "effect": 1.5},  # Гриль
-    "fryer": {"unlocked": false, "effect": 1.2},  # Фритюрница
-    "coffee_machine": {"unlocked": false, "effect": 1.1},  # Кофемашина
+    "grill": {"unlocked": false, "effect": 1.5, "new_recipes": ["Бургер с грилем"]},  # Гриль
+    "fryer": {"unlocked": false, "effect": 1.2, "new_recipes": ["Картошка фри"]},  # Фритюрница
+    "coffee_machine": {"unlocked": false, "effect": 1.1, "new_recipes": ["Кофе"]},  # Кофемашина
+    "oven": {"unlocked": false, "effect": 1.3, "new_recipes": ["Пицца"]},  # Духовка
+    "blender": {"unlocked": false, "effect": 1.1, "new_recipes": ["Смузи"]},  # Блендер
 }
 
 # Функция для добавления рублей
@@ -82,5 +84,22 @@ func unlock_equipment(equipment_name):
                 $BurgerRestaurant/Kitchen/Fryer.visible = true
             "coffee_machine":
                 $BurgerRestaurant/Kitchen/CoffeeMachine.visible = true
+            "oven":
+                $BurgerRestaurant/Kitchen/Oven.visible = true
+            "blender":
+                $BurgerRestaurant/Kitchen/Blender.visible = true
+        
+        # Добавляем новые рецепты
+        for recipe in equipment[equipment_name]["new_recipes"]:
+            if recipe == "Бургер с грилем":
+                recipes["Бургер с грилем"] = {"булка": 1, "говяжья котлета": 1, "сыр чеддер": 1, "гриль": 1, "цена": 150}
+            elif recipe == "Картошка фри":
+                recipes["Картошка фри"] = {"картошка": 1, "цена": 50}
+            elif recipe == "Кофе":
+                recipes["Кофе"] = {"кофе": 1, "цена": 30}
+            elif recipe == "Пицца":
+                recipes["Пицца"] = {"тесто": 1, "сыр": 1, "томаты": 1, "цена": 200}
+            elif recipe == "Смузи":
+                recipes["Смузи"] = {"фрукты": 1, "молоко": 1, "цена": 100}
     else:
         UI.show_message("Оборудование не найдено.")
