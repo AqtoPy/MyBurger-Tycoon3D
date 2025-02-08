@@ -6,6 +6,14 @@ extends CanvasLayer
 @onready var upgrade_list = $UpgradeList
 @onready var equipment_list = $EquipmentList
 
+@onready var name_input = $NameInput
+@onready var name_button = $NameButton
+
+func _on_NameButton_pressed():
+    var new_name = name_input.text
+    if new_name != "":
+        RestaurantName.set_restaurant_name(new_name)
+
 # Функция для обновления рублей
 func update_rubles(amount):
     rubles_label.text = "Рублей: " + str(amount)
