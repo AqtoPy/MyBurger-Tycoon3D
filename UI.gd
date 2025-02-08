@@ -37,3 +37,6 @@ func update_equipment_list(equipment):
         var equipment_label = Label.new()
         equipment_label.text = item + " (Разблокировано: " + str(equipment[item]["unlocked"]) + ")"
         equipment_list.add_child(equipment_label)
+
+func _on_HireStaffButton_pressed():
+    GameManager.hire_staff()
