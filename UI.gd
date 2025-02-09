@@ -9,6 +9,11 @@ extends CanvasLayer
 @onready var name_input = $NameInput
 @onready var name_button = $NameButton
 
+@onready var recipe_buttons = $RecipeButtons
+
+func _on_RecipeButton_pressed(recipe_name):
+    CookingZone.start_cooking(recipe_name)
+
 func _on_NameButton_pressed():
     var new_name = name_input.text
     if new_name != "":
