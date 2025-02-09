@@ -1,13 +1,19 @@
 extends CharacterBody3D
 
-# Статус работника
-var is_busy = false
+var current_task = null
+var efficiency = 1.0
 
-# Функция для приготовления еды
-func cook_food(recipe_name):
-    if not is_busy:
-        is_busy = true
-        var cooking_time = GameManager.recipes[recipe_name]["cooking_time"]
-        await get_tree().create_timer(cooking_time).timeout  # Имитация приготовления
-        is_busy = false
-        UI.show_message("Приготовлено: " + recipe_name)
+func assign_task(task):
+    current_task = task
+    $TaskTimer.start(task.time / efficiency)
+
+func _on_task_timer_timeout():
+    complete_task()
+
+func complete_task():
+    if current_task.type == "cooking":
+        spawn_food(current_task.recipe)
+    current_task = null
+
+func upgrade():
+    efficiency *= 1.2
