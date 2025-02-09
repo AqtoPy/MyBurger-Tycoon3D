@@ -19,7 +19,18 @@ func _on_timer_timeout():
     current_recipe = ""
     $ProgressBar.visible = false
 
-func spawn_food(recipe):
-    var food = preload("res://food.tscn").instantiate()
-    food.init(recipe)
-    add_child(food)
+func spawn_food(recipe_name):
+    var food_scene = load("res://FoodScenes/" + recipe_name + ".tscn")
+    var food_instance = food_scene.instantiate()
+    add_child(food_instance)
+    
+    # Передаём еду посетителю
+    var customer = get_nearest_customer()
+    if customer:
+        customer.receive_food(recipe_name)
+
+func get_nearest_customer():
+    var customers = get_tree().get_nodes_in_group("customers")
+    if customers.size() > 0:
+        return customers[0]  # Возвращаем первого посетителя
+    return null
