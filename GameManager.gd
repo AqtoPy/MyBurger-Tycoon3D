@@ -32,7 +32,48 @@ var equipment = {
     "coffee_machine": {"unlocked": false, "effect": 1.1, "new_recipes": ["Кофе"]},  # Кофемашина
     "oven": {"unlocked": false, "effect": 1.3, "new_recipes": ["Пицца"]},  # Духовка
     "blender": {"unlocked": false, "effect": 1.1, "new_recipes": ["Смузи"]},  # Блендер
+    "microwave": {"unlocked": false, "effect": 1.1, "new_recipes": ["Пирожки"]},  # Микроволновка
 }
+
+# Пример для гриля
+func start_grilling(recipe_name):
+    if current_recipe == "":
+        current_recipe = recipe_name
+        UI.show_message("Начато приготовление на гриле: " + recipe_name)
+        await get_tree().create_timer(5).timeout  # Имитация приготовления
+        UI.show_message("Приготовлено на гриле: " + recipe_name)
+        spawn_food(recipe_name)  # Создаём готовое блюдо
+        current_recipe = ""
+
+# Пример для фритюра
+func start_frying(recipe_name):
+    if current_recipe == "":
+        current_recipe = recipe_name
+        UI.show_message("Начато приготовление во фритюре: " + recipe_name)
+        await get_tree().create_timer(5).timeout  # Имитация приготовления
+        UI.show_message("Приготовлено во фритюре: " + recipe_name)
+        spawn_food(recipe_name)  # Создаём готовое блюдо
+        current_recipe = ""
+
+# Пример для кофемашины
+func start_coffee(recipe_name):
+    if current_recipe == "":
+        current_recipe = recipe_name
+        UI.show_message("Начато приготовление в кофемашине: " + recipe_name)
+        await get_tree().create_timer(5).timeout  # Имитация приготовления
+        UI.show_message("Приготовлено в кофемашине: " + recipe_name)
+        spawn_food(recipe_name)  # Создаём готовое блюдо
+        current_recipe = ""
+
+# Пример для блендера
+func start_blender(recipe_name):
+    if current_recipe == "":
+        current_recipe = recipe_name
+        UI.show_message("Начато приготовление в блендере: " + recipe_name)
+        await get_tree().create_timer(5).timeout  # Имитация приготовления
+        UI.show_message("Приготовлено в блендере: " + recipe_name)
+        spawn_food(recipe_name)  # Создаём готовое блюдо
+        current_recipe = ""
 
 # Функция для добавления рублей
 func add_rubles(amount):
