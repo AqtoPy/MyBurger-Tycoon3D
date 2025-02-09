@@ -11,6 +11,19 @@ extends CanvasLayer
 
 @onready var recipe_buttons = $RecipeButtons
 
+func update_ui():
+    $RublesLabel.text = "Рубли: %d" % GameManager.rubles
+    $LevelLabel.text = "Уровень: %d" % GameManager.player_level
+    update_recipe_list()
+
+func update_recipe_list():
+    $RecipeList.clear()
+    for recipe in GameManager.recipes:
+        $RecipeList.add_item("%s (%d руб)" % [recipe, GameManager.recipes[recipe].price])
+
+func _on_recipe_selected(index):
+    GameManager.selected_recipe = $RecipeList.get_item_text(index).split(" ")[0]
+
 func _on_RecipeButton_pressed(recipe_name):
     CookingZone.start_cooking(recipe_name)
 
