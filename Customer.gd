@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var order = []
+var order = ""
 var holding_food = null
 
 func choose_order():
@@ -16,7 +16,7 @@ func receive_food(food):
         leave()
 
 func pay():
-    GameManager.add_rubles(GameManager.recipes[order].price)
+    GameManager.add_rubles(GameManager.recipes[order]["price"])
 
 func leave():
     await get_tree().create_timer(5).timeout
