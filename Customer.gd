@@ -1,12 +1,18 @@
 extends CharacterBody3D
 
-var order = ""
-var holding_food = null
+var order = ""  # Текущий заказ
+var holding_food = null  # Блюдо в руках
 
 func choose_order():
-    var recipes = GameManager.recipes.keys()
-    order = recipes[randi() % recipes.size()]
-    $OrderBubble.show_order(order)
+    var available_recipes = []
+    for equipment in GameManager.equipment:
+        if equipment.visible:  # Проверяем, доступно ли оборудование
+            available_recipes += equipment.recipes
+    if available_recipes.size() > 0:
+        order = available_recipes[randi() % available_recipes.size()]
+        $OrderBubble.show_order(order)
+    else:
+        queue_free()  # Если нет доступных рецептов, посетитель уходит
 
 func receive_food(food):
     if food == order:
