@@ -3,9 +3,14 @@ extends Area3D
 var current_recipe = ""
 var cooking_progress = 0.0
 
+@onready var equipment = get_parent()  # Ссылка на оборудование
+
 func _on_body_entered(body):
     if body.name == "Player":
-        start_cooking()
+        if equipment.can_cook(GameManager.selected_recipe):
+            start_cooking(GameManager.selected_recipe)
+        else:
+            UI.show_message("Это оборудование не подходит для выбранного рецепта!")
 
 func start_cooking():
     var recipe = GameManager.selected_recipe
